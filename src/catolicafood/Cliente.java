@@ -1,6 +1,10 @@
 package catolicafood;
 
+import Reader.Arch;
+
 public class Cliente extends User{
+    
+    static Arch arq = new Arch();
     
     private String email;
     private String name;
@@ -55,6 +59,29 @@ public class Cliente extends User{
 
     public void setCourse(String course) {
         this.course = course;
+    }
+    
+    public boolean createAccount(String email, String password){
+        if(arq.writeDoc(email, password)){
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean onLogin(String email, String password) {
+        if(arq.checkLogin(email, password)){
+            return true;
+        }
+        
+        return false;
+    }
+    
+    public boolean onDeleteAccount() {
+        if(arq.writeDoc("", "")){
+            return true;
+        } 
+        
+        return false;
     }
     
 //    public boolean cancelAccount() {

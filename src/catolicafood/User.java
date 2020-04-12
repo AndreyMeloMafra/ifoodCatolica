@@ -21,6 +21,10 @@ public abstract class User {
     
     abstract boolean onLogin(String email, String password);
     
+    abstract boolean onDeleteAccount();
+    
+    abstract boolean createAccount(String email, String password);
+    
 //    public boolean onLogin(String email, String password) {
 //        if
 //    }
