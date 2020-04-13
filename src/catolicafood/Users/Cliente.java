@@ -79,7 +79,8 @@ public class Cliente extends User{
     }
     
     public boolean onLogin(String email, String password) {
-        if(arq.checkLogin(email, password)){
+        boolean logged = arq.checkLogin(email, password);
+        if(logged){
             return true;
         }
         

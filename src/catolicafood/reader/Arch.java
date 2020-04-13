@@ -63,8 +63,8 @@ public class Arch {
             String linha = lerArq.readLine();
             while (linha != null) {
                 linha = lerArq.readLine();
-                
-                if(linha.equals(emailF)){
+
+                if (linha.equals(emailF)) {
                     return result;
                 }
             }
@@ -78,16 +78,13 @@ public class Arch {
         return result;
     }
 
-        public boolean writeItemsDoc(String name, String value, String description) {
+    public boolean writeItemsDoc(int id, String name, String value, String description, int key) {
         boolean result = false;
-
-
+        
         try {
-            FileWriter arq = new FileWriter(userDoc, true);
-            FileReader arqR = new FileReader(userDoc);
-            BufferedReader lerArq = new BufferedReader(arqR);
+            FileWriter arq = new FileWriter(itemsDoc, true);
 
-            arq.write(name + " - R$" + value + "\n" + description);
+            arq.write(id + "-" + name + "-" + value + "-" + description + "-" + key + "\n");
             arq.close();
             result = true;
         } catch (IOException e) {
@@ -96,7 +93,7 @@ public class Arch {
 
         return result;
     }
-    
+
     public boolean readDoc() {
         boolean result = false;
 
@@ -135,14 +132,16 @@ public class Arch {
             emailF = email.toLowerCase();
             passwordF = password.toLowerCase();
 
-            String linha = lerArq.readLine();
-            while (linha != null) {
+            String linha;
+            do {
                 linha = lerArq.readLine();
 
                 if (linha.equals(emailF)) {
+
                     break;
                 }
-            }
+            } while (linha != null);
+
             if (linha.equals(emailF)) {
                 count++;
             }

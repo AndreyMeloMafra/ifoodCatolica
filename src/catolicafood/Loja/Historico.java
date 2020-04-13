@@ -5,24 +5,26 @@
  */
 package catolicafood.Loja;
 
+//Packages
+import catolicafood.utils.ListHist;
 /**
  *
  * @author andrey
  */
 public class Historico {
     
-    private Pedidos[] pedidos;
+    private ListHist pedidos;
     private int tam;
 
     public int getTam() {
         return tam;
     }
     
-    public Pedidos[] getPedidos() {
+    public ListHist getPedidos() {
         return pedidos;
     }
 
-    public void setPedidos(Pedidos[] pedidos) {
+    public void setPedidos(ListHist pedidos) {
         this.pedidos = pedidos;
     }
 }

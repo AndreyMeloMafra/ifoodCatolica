@@ -5,18 +5,23 @@
  */
 package catolicafood.Loja;
 
+//Packages
+import catolicafood.reader.Arch;
 /**
  *
  * @author andrey
  */
 public class Items {
 
+    static Arch arq = new Arch();
+    
+    private int id;
     private String name;
     private String value;
     private String description;
     private int key;
 
-    public Items(String name, String value, String description, int key) {
+    public Items(int id, String name, String value, String description, int key) {
         boolean number;
         double va;
         
@@ -36,8 +41,15 @@ public class Items {
         if(key >= 0 || key <= 3) {
             this.key = key;
         }
+        
+        boolean writed = arq.writeItemsDoc(id, name, value, description, key);
+        System.out.println("escreveu " + writed);
     }
 
+    public int getId() {
+        return id;
+    }
+    
     public String getName() {
         return name;
     }

@@ -11,6 +11,7 @@ import java.util.Scanner;
 import catolicafood.Users.Cliente;
 import catolicafood.reader.Arch;
 import catolicafood.menu.Menu;
+import catolicafood.Loja.Items;
 
 /**
  *
@@ -22,6 +23,7 @@ public class CatolicaFood {
     static Arch arq = new Arch();
     static Menu menu = new Menu();
     static Scanner sc = new Scanner(System.in);
+    static Items i1 = new Items(1, "coca", "4.5", "Refrigerante em lata", 1);
 
     public static void main(String[] args) {
         byte control;
@@ -37,6 +39,8 @@ public class CatolicaFood {
             menu.loginMenu();
         } else if(control == 2) {
             menu.createAccountMenu();
+        } else if(control == 0) {
+//            System.out.println(i1.getName());
         }
 
     }
