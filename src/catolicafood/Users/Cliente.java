@@ -1,7 +1,17 @@
-package catolicafood;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package catolicafood.Users;
 
-import Reader.Arch;
+import catolicafood.Users.User;
+import catolicafood.reader.Arch;
 
+/**
+ *
+ * @author andrey
+ */
 public class Cliente extends User{
     
     static Arch arq = new Arch();
@@ -62,7 +72,7 @@ public class Cliente extends User{
     }
     
     public boolean createAccount(String email, String password){
-        if(arq.writeDoc(email, password)){
+        if(arq.writeUserDoc(email, password)){
             return true;
         }
         return false;
@@ -77,16 +87,12 @@ public class Cliente extends User{
     }
     
     public boolean onDeleteAccount() {
-        if(arq.writeDoc("", "")){
+        if(arq.writeUserDoc("", "")){
             return true;
         } 
         
         return false;
     }
-    
-//    public boolean cancelAccount() {
-//        
-//    }
     
     public boolean changeData(int age) {
         if(age > 0) {
