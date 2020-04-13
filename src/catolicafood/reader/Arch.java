@@ -116,6 +116,11 @@ public class Arch {
 
         return result;
     }
+    
+    public void preencher() {
+        String line;
+        String[] var = new String[4];
+    }
 
     public boolean checkLogin(String email, String password) {
         boolean result = false;
