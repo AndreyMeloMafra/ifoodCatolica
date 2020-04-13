@@ -9,28 +9,28 @@ package catolicafood.utils;
  *
  * @author andrey
  */
-public class ListItems {
+public class ListHist {
 
-    private NodeItems inicio;
-    private NodeItems fim;
+    private NodeHist inicio;
+    private NodeHist fim;
     private int tam;
 
-    public ListItems() {
+    public ListHist() {
         this.inicio = null;
         this.fim = null;
         tam = 0;
     }
 
-    public NodeItems getInicio() {
+    public NodeHist getInicio() {
         return inicio;
     }
 
-    public NodeItems getFim() {
+    public NodeHist getFim() {
         return fim;
     }
     
     //Add functions
-    public void addInicio(NodeItems data) {
+    public void addInicio(NodeHist data) {
         data.setProx(data);
         this.inicio = data;
 
@@ -42,7 +42,7 @@ public class ListItems {
         tam++;
     }
 
-    public void addFim(NodeItems data) {
+    public void addFim(NodeHist data) {
         if (this.inicio != null) {
             this.fim = data;
         } else {
@@ -52,28 +52,28 @@ public class ListItems {
         tam++;
     }
 
-    public void addPos(NodeItems data, int pos) {
+    public void addPos(NodeHist data, int pos) {
         if (pos == 0) {
             data.setProx(this.inicio.getProx());
             inicio = data;
         } else {
-            NodeItems aux = elementoEm(pos - 1);
+            NodeHist aux = elementoEm(pos - 1);
             aux.setProx(data);
         }
         tam++;
     }
     
     //Remove function
-    public void remover(NodeItems data){
+    public void remover(NodeHist data){
         int pos = search(data);
-        NodeItems anterior = elementoEm(pos - 1);
-        NodeItems proximo = elementoEm(pos + 1);
+        NodeHist anterior = elementoEm(pos - 1);
+        NodeHist proximo = elementoEm(pos + 1);
         anterior.setProx(proximo);
     }
     
     //Search function
-    public int search(NodeItems data) {
-        NodeItems aux = this.inicio;
+    public int search(NodeHist data) {
+        NodeHist aux = this.inicio;
         int count = 0;
         
         while(aux.getProx() != null) {
@@ -91,10 +91,10 @@ public class ListItems {
         return this.tam;
     }
 
-    public NodeItems elementoEm(int i) {
+    public NodeHist elementoEm(int i) {
         boolean next = true;
         int count = 0;
-        NodeItems aux = this.inicio;
+        NodeHist aux = this.inicio;
 
         while (next) {
             if (count < i) {
@@ -113,10 +113,9 @@ public class ListItems {
     
     @Override
     public String toString(){
-        //Uso de string para concatenações não é recomendado. Veremos uma melhor forma em breve
         String lista;
 
-        NodeItems aux = inicio;
+        NodeHist aux = inicio;
 
         lista = "";
         while (aux != null) {

@@ -5,25 +5,31 @@
  */
 package catolicafood.Loja;
 
+
+//Packages
+import catolicafood.utils.ListItems;
+import catolicafood.utils.NodeItems;
 /**
  *
  * @author andrey
  */
 public class Pedidos {
     
-    private Items[] produtos;
+    private ListItems produtos;
     private double totalValue;
+    private int tam;
 
     public Pedidos() {
         this.produtos = null;
         this.totalValue = 0;
+        this.tam = 0;
     }
     
-    public Items[] getProdutos() {
+    public ListItems getProdutos() {
         return produtos;
     }
 
-    public void setProdutos(Items[] produtos) {
+    public void setProdutos(ListItems produtos) {
         this.produtos = produtos;
     }
 
@@ -37,12 +43,13 @@ public class Pedidos {
     
     private void calcTotalValue() {
         int i;
-        double aux = 0;
-
-        for (i = 0; i < this.produtos.length; i++) {
-            aux = Double.parseDouble(produtos[i].getValue());
-            
-            this.totalValue += aux;
+        double sumValue = 0;
+        NodeItems aux = produtos.getInicio();
+        
+        while(aux != null) {
+            sumValue += Double.parseDouble(aux.getValue().getValue());
+            aux = aux.getProx();
         }
+
     }
 }
