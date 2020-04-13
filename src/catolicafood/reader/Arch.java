@@ -16,11 +16,17 @@ import java.io.PrintWriter;
 import java.io.IOException;
 import java.util.Locale;
 
+import catolicafood.utils.ListItems;
+import catolicafood.utils.NodeItems;
+import catolicafood.Loja.Items;
+
 /**
  *
  * @author andrey
  */
 public class Arch {
+
+    static ListItems list = new ListItems();
 
     final File userDoc = new File("./src/catolicafood/reader/Users.txt");
     final File itemsDoc = new File("./src/catolicafood/reader/Items.txt");
@@ -80,7 +86,7 @@ public class Arch {
 
     public boolean writeItemsDoc(int id, String name, String value, String description, int key) {
         boolean result = false;
-        
+
         try {
             FileWriter arq = new FileWriter(itemsDoc, true);
 
@@ -116,10 +122,33 @@ public class Arch {
 
         return result;
     }
-    
-    public void preencher() {
-        String line;
-        String[] var = new String[4];
+
+    public ListItems preencher() {
+        String line = "";
+        String[] var;
+
+        try {
+            FileReader arq = new FileReader(itemsDoc);
+            BufferedReader lerArq = new BufferedReader(arq);
+
+            do {
+                line = lerArq.readLine();
+                if(line == null) {
+                    break;
+                }
+                
+                var = line.split("-");                
+                Items auxItems = new Items(Integer.parseInt(var[0]), var[1], var[2], var[3], Integer.parseInt(var[4]));
+                NodeItems auxNode = new NodeItems(auxItems, null);
+
+                list.addInicio(auxNode);
+            } while (line != null);
+            arq.close();
+            
+        } catch (IOException e) {
+            System.err.println("Error: " + e.getMessage());
+        }
+        return list;
     }
 
     public boolean checkLogin(String email, String password) {

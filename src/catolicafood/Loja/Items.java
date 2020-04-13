@@ -7,6 +7,7 @@ package catolicafood.Loja;
 
 //Packages
 import catolicafood.reader.Arch;
+
 /**
  *
  * @author andrey
@@ -14,7 +15,7 @@ import catolicafood.reader.Arch;
 public class Items {
 
     static Arch arq = new Arch();
-    
+
     private int id;
     private String name;
     private String value;
@@ -24,6 +25,9 @@ public class Items {
     public Items(int id, String name, String value, String description, int key) {
         boolean number;
         double va;
+
+        this.id = id;
+        this.name = name;
         
         try {
             va = Double.parseDouble(value);
@@ -31,25 +35,22 @@ public class Items {
         } catch (NumberFormatException e) {
             number = false;
         }
-        
-        if(number) {
+
+        if (number) {
             this.value = value;
         }
-        
+
         this.description = description;
-        
-        if(key >= 0 || key <= 3) {
+
+        if (key >= 0 || key <= 3) {
             this.key = key;
         }
-        
-        boolean writed = arq.writeItemsDoc(id, name, value, description, key);
-        System.out.println("escreveu " + writed);
     }
 
     public int getId() {
         return id;
     }
-    
+
     public String getName() {
         return name;
     }
@@ -74,6 +75,13 @@ public class Items {
         this.description = description;
     }
 
+    public boolean createItem() {
+//        System.out.println(this.id + " " + this.name + " " + this.value + " " + this.description + " " + this.key);
+        boolean writed = arq.writeItemsDoc(this.id, this.name, this.value, this.description, this.key);
+        
+        return writed;
+    }
+
     public boolean alteerValue(String newValue) {
         double v = Double.parseDouble(newValue);
         boolean result = false;
@@ -85,7 +93,7 @@ public class Items {
 
         return result;
     }
-    
+
     @Override
     public String toString() {
         return "name: " + this.name + " - valor: " + this.value + " - descrição: " + this.description;

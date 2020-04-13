@@ -31,23 +31,21 @@ public class ListHist {
     
     //Add functions
     public void addInicio(NodeHist data) {
-        data.setProx(data);
         this.inicio = data;
 
-        if (this.fim != null) {
-            this.inicio = data;
-        } else {
-            this.inicio = this.fim = data;
+        if (this.tam == 0) {
+            this.fim = this.inicio;
         }
+       
         tam++;
     }
 
     public void addFim(NodeHist data) {
-        if (this.inicio != null) {
-            this.fim = data;
+        if (this.tam == 0) {
+            addInicio(data);
         } else {
-            this.fim = this.inicio = data;
-            this.inicio.setProx(data);
+            this.fim.setProx(data);
+            this.fim = data;
         }
         tam++;
     }

@@ -15,6 +15,16 @@ public class NodeItems {
     
     private Items value;
     private NodeItems prox;
+    
+    public NodeItems(){
+        this.value = null;
+        this.prox = null;
+    }
+    
+    public NodeItems(Items value, NodeItems prox) {
+        this.value = value;
+        this.prox = prox;
+    }
 
     public Items getValue() {
         return value;

@@ -31,23 +31,21 @@ public class ListItems {
     
     //Add functions
     public void addInicio(NodeItems data) {
-        data.setProx(data);
         this.inicio = data;
 
-        if (this.fim != null) {
-            this.inicio = data;
-        } else {
-            this.inicio = this.fim = data;
+        if (this.tam == 0) {
+            this.fim = this.inicio;
         }
+       
         tam++;
     }
 
     public void addFim(NodeItems data) {
-        if (this.inicio != null) {
-            this.fim = data;
+        if (this.tam == 0) {
+            addInicio(data);
         } else {
-            this.fim = this.inicio = data;
-            this.inicio.setProx(data);
+            this.fim.setProx(data);
+            this.fim = data;
         }
         tam++;
     }
@@ -113,7 +111,6 @@ public class ListItems {
     
     @Override
     public String toString(){
-        //Uso de string para concatenações não é recomendado. Veremos uma melhor forma em breve
         String lista;
 
         NodeItems aux = inicio;
@@ -124,6 +121,7 @@ public class ListItems {
             aux = aux.getProx();
         }
 
+        lista += " tamanho: " + tam;
         return lista;
     
     }
