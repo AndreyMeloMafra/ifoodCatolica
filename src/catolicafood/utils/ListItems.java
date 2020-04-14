@@ -111,18 +111,17 @@ public class ListItems {
     
     @Override
     public String toString(){
-        String lista;
+        String list;
 
-        NodeItems aux = inicio;
+        NodeItems aux = this.inicio;
 
-        lista = "";
+        list = "";
         while (aux != null) {
-            lista = lista + " " + aux.getValue()+ " \n";
+            list = list + " " + aux.getValue()+ " \n";
             aux = aux.getProx();
         }
 
-        lista += " tamanho: " + tam;
-        return lista;
+        return list;
     
     }
 }

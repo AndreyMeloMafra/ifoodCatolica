@@ -9,6 +9,9 @@ import java.util.Scanner;
 
 //Packages
 import catolicafood.Users.Cliente;
+import catolicafood.Loja.Items;
+import catolicafood.utils.NodeItems;
+import catolicafood.reader.Arch;
 
 /**
  *
@@ -18,8 +21,9 @@ public class Menu {
 
     static Scanner sc = new Scanner(System.in);
     static Cliente c = new Cliente();
+    static Arch arq = new Arch();
 
-    public void loginMenu() {
+    public boolean loginMenu() {
         String email;
         String password;
         boolean logged;
@@ -37,9 +41,11 @@ public class Menu {
         } else {
             System.out.println("Entrando...");
         }
+        
+        return logged;
     }
 
-    public void createAccountMenu() {
+    public boolean createAccountMenu() {
         String email;
         String password;
         boolean created;
@@ -57,5 +63,33 @@ public class Menu {
         } else {
             System.out.println("Criado com sucesso!");
         }
+        
+        return created;
+    }
+    
+    public void createItem() {
+        int id = arq.newId();
+        String name;
+        String value;
+        String description;
+        int key = 1;
+        
+        System.out.print("Digite no nome do produto: ");
+        name = sc.nextLine();
+        
+        System.out.print("Digite o valor do produto: ");
+        value = sc.nextLine();
+        
+        System.out.print("Descreva o produto: ");
+        description = sc.nextLine();
+        
+        Items item = new Items(id, name, value, description, key);
+        item.createItem();
+        
+        NodeItems node = new NodeItems(item, null);
+    }
+    
+    public void showItems() {
+        
     }
 }

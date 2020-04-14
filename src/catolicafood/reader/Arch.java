@@ -66,14 +66,20 @@ public class Arch {
             emailF = email.toLowerCase();
             passwordF = password.toLowerCase();
 
-            String linha = lerArq.readLine();
-            while (linha != null) {
-                linha = lerArq.readLine();
-
-                if (linha.equals(emailF)) {
-                    return result;
+            String line = "";
+            do {
+                line = lerArq.readLine();
+                
+                if(line == null) {
+                    break;
                 }
-            }
+                
+                System.out.println("Linha " + line + " email: " + emailF);
+                if (line.equals(emailF)) {
+                    result = true;
+                    return result;
+                } 
+            } while (line != null);
             arq.write(emailF + "\n" + passwordF + "\n");
             arq.close();
             result = true;
@@ -123,6 +129,30 @@ public class Arch {
         return result;
     }
 
+    public int newId() {
+        int result = 0;
+
+        try {
+            FileReader arq = new FileReader(itemsDoc);
+            BufferedReader lerArq = new BufferedReader(arq);
+
+            String linha = lerArq.readLine();
+
+            if (linha == null) {
+                return result;
+            }
+
+            while (linha != null) {
+                result++;
+                linha = lerArq.readLine();
+            }
+            arq.close();
+        } catch (IOException e) {
+            System.err.println("Error: " + e.getMessage());
+        }
+        return result;
+    }
+
     public ListItems preencher() {
         String line = "";
         String[] var;
@@ -133,21 +163,22 @@ public class Arch {
 
             do {
                 line = lerArq.readLine();
-                if(line == null) {
+                if (line == null) {
                     break;
                 }
-                
-                var = line.split("-");                
+
+                var = line.split("-");
                 Items auxItems = new Items(Integer.parseInt(var[0]), var[1], var[2], var[3], Integer.parseInt(var[4]));
                 NodeItems auxNode = new NodeItems(auxItems, null);
 
-                list.addInicio(auxNode);
+                list.addFim(auxNode);
             } while (line != null);
             arq.close();
-            
+
         } catch (IOException e) {
             System.err.println("Error: " + e.getMessage());
         }
+//        System.out.println(list);
         return list;
     }
 

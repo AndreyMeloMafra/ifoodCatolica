@@ -44,6 +44,6 @@ public class NodeItems {
     
     @Override
     public String toString() {
-        return value.toString();
+        return "item: " + this.value;
     }
 }

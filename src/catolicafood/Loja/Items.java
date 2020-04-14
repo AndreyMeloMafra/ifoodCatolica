@@ -96,6 +96,6 @@ public class Items {
 
     @Override
     public String toString() {
-        return "name: " + this.name + " - valor: " + this.value + " - descrição: " + this.description;
+        return "id: " + this.id + " nome: " + this.name + " - valor: " + this.value + " - descrição: " + this.description;
     }
 }
