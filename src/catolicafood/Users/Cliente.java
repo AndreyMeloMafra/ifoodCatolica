@@ -5,7 +5,6 @@
  */
 package catolicafood.Users;
 
-import catolicafood.Users.User;
 import catolicafood.reader.Arch;
 
 /**

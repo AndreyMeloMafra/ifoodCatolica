@@ -37,6 +37,7 @@ public class CatolicaFood {
         char market;
 
         arq.createDoc();
+        list = arq.preencher();
 
         System.out.println("Bem vindo");
         while (!controlProgram) {
@@ -50,7 +51,6 @@ public class CatolicaFood {
 
                 while (!controlMarket) {
                     if (logged) {
-                        list = arq.preencher();
                         System.out.println("Items da loja");
                         System.out.println("Digite o id do item que você deseja comprar:");
                         System.out.println(list);
@@ -69,7 +69,6 @@ public class CatolicaFood {
                         System.out.print("Deseja continuar navegando pela loja? ");
                         market = sc.next().charAt(0);
 
-                        
                         if (market == 's' || market == 'S') {
                             System.out.println("Voltando...");
                         } else if (market == 'n' || market == 'N') {

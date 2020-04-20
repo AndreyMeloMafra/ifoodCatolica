@@ -19,7 +19,7 @@ import java.util.Locale;
 import catolicafood.utils.ListItems;
 import catolicafood.utils.NodeItems;
 import catolicafood.Loja.Items;
-
+import catolicafood.exceptions.UserAlreadyExists;
 /**
  *
  * @author andrey
@@ -74,7 +74,6 @@ public class Arch {
                     break;
                 }
                 
-                System.out.println("Linha " + line + " email: " + emailF);
                 if (line.equals(emailF)) {
                     result = true;
                     return result;
