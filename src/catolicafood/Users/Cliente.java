@@ -5,16 +5,19 @@
  */
 package catolicafood.Users;
 
+import catolicafood.exceptions.UserAlreadyExists;
 import catolicafood.reader.Arch;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author andrey
  */
-public class Cliente extends User{
-    
+public class Cliente extends User {
+
     static Arch arq = new Arch();
-    
+
     private String email;
     private String name;
     private String password;
@@ -45,7 +48,7 @@ public class Cliente extends User{
     public void setPassword(String password) {
         this.password = password;
     }
-    
+
     public String getCpf() {
         return cpf;
     }
@@ -69,47 +72,45 @@ public class Cliente extends User{
     public void setCourse(String course) {
         this.course = course;
     }
-    
-    public boolean createAccount(String email, String password){
-        if(arq.writeUserDoc(email, password)){
-            return true;
+
+    public void createAccount(String email, String password) {
+        try {
+            arq.writeUserDoc(email, password);
+        } catch (UserAlreadyExists ex) {
+            Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return false;
+
     }
-    
+
     public boolean onLogin(String email, String password) {
         boolean logged = arq.checkLogin(email, password);
-        if(logged){
+        if (logged) {
             return true;
         }
-        
+
         return false;
     }
-    
-    public boolean onDeleteAccount() {
-        if(arq.writeUserDoc("", "")){
-            return true;
-        } 
-        
-        return false;
+
+    public void onDeleteAccount() {
+        arq.deleteUser(this.email, this.password);
     }
-    
+
     public boolean changeData(int age) {
-        if(age > 0) {
+        if (age > 0) {
             this.age = age;
             return true;
         } else {
             return false;
         }
     }
-    
+
     public boolean changeData(int pos, String data) {
         boolean result = true;
         switch (pos) {
             case 1:
                 this.name = data;
                 break;
-            case 2: 
+            case 2:
                 this.email = data;
                 break;
             case 3:
@@ -125,7 +126,7 @@ public class Cliente extends User{
                 result = false;
                 break;
         }
-        
-        return result;        
+
+        return result;
     }
 }

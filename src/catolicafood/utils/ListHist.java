@@ -52,8 +52,8 @@ public class ListHist {
 
     public void addPos(NodeHist data, int pos) {
         if (pos == 0) {
-            data.setProx(this.inicio.getProx());
-            inicio = data;
+            data.setProx(this.inicio);
+            this.inicio = data;
         } else {
             NodeHist aux = elementoEm(pos - 1);
             aux.setProx(data);

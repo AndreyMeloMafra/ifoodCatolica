@@ -14,12 +14,13 @@ import java.io.File;
 import java.io.PrintWriter;
 
 import java.io.IOException;
-import java.util.Locale;
+import java.util.ArrayList;
 
 import catolicafood.utils.ListItems;
 import catolicafood.utils.NodeItems;
 import catolicafood.Loja.Items;
 import catolicafood.exceptions.UserAlreadyExists;
+
 /**
  *
  * @author andrey
@@ -52,8 +53,8 @@ public class Arch {
         return result;
     }
 
-    public boolean writeUserDoc(String email, String password) {
-        boolean result = false;
+    public void writeUserDoc(String email, String password) throws UserAlreadyExists {
+//        boolean result = false;
 
         String emailF;
         String passwordF;
@@ -69,24 +70,61 @@ public class Arch {
             String line = "";
             do {
                 line = lerArq.readLine();
-                
-                if(line == null) {
+
+                if (line == null) {
                     break;
                 }
-                
+
                 if (line.equals(emailF)) {
-                    result = true;
-                    return result;
-                } 
+//                    result = true;
+//                    return result;
+                    throw new UserAlreadyExists("Usuário já existe ");
+                }
             } while (line != null);
             arq.write(emailF + "\n" + passwordF + "\n");
             arq.close();
-            result = true;
+//            result = true;
         } catch (IOException e) {
+            System.err.println("Error: " + e.getMessage());
+        } catch (UserAlreadyExists e) {
             System.err.println("Error: " + e.getMessage());
         }
 
-        return result;
+//        return result;
+    }
+
+    public void deleteUser(String email, String password) {
+        int i;
+
+        try {
+            FileReader arq = new FileReader(userDoc);
+            BufferedReader lerArq = new BufferedReader(arq);
+
+            FileWriter arq2 = new FileWriter(userDoc);
+            BufferedWriter lerArq2 = new BufferedWriter(arq2);
+
+            String linha = lerArq.readLine();
+            ArrayList<String> data = new ArrayList();
+
+            while (linha != null) {
+                if (!linha.equals(email) || !linha.equals(password)) {
+                    data.add(linha);
+                }
+                linha = lerArq.readLine();
+            }
+
+            arq.close();
+            lerArq.close();
+
+            for (i = 0; i < data.size(); i++) {
+                lerArq2.write(data.get(i));
+                lerArq2.newLine();
+            }
+
+            arq.close();
+            lerArq2.close();
+        } catch (Exception e) {
+        }
     }
 
     public boolean writeItemsDoc(int id, String name, String value, String description, int key) {

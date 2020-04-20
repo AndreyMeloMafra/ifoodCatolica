@@ -45,7 +45,7 @@ public class Menu {
         return logged;
     }
 
-    public boolean createAccountMenu() {
+    public void createAccountMenu() {
         String email;
         String password;
         boolean created;
@@ -56,15 +56,15 @@ public class Menu {
         System.out.print("Digite sua senha: ");
         password = sc.nextLine();
 
-        created = c.createAccount(email, password);
+        c.createAccount(email, password);
+//        
+//        if(!created) {
+//            System.out.println("Este usuário já existe!");
+//        } else {
+//            System.out.println("Criado com sucesso!");
+//        }
         
-        if(!created) {
-            System.out.println("Este usuário já existe!");
-        } else {
-            System.out.println("Criado com sucesso!");
-        }
-        
-        return created;
+//        return created;
     }
     
     public void createItem() {
