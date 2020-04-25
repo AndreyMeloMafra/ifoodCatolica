@@ -10,6 +10,7 @@ import java.util.Scanner;
 //Packages
 import catolicafood.Users.Cliente;
 import catolicafood.Loja.Items;
+import catolicafood.exceptions.UserAlreadyExists;
 import catolicafood.utils.NodeItems;
 import catolicafood.reader.Arch;
 
@@ -56,7 +57,11 @@ public class Menu {
         System.out.print("Digite sua senha: ");
         password = sc.nextLine();
 
-        c.createAccount(email, password);
+        try {
+            c.createAccount(email, password);
+        } catch(UserAlreadyExists e){
+            System.out.print(e.getMessage());
+        }
 //        
 //        if(!created) {
 //            System.out.println("Este usuário já existe!");

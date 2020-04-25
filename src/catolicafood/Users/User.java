@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package catolicafood.Users;
-
+import catolicafood.exceptions.UserAlreadyExists;
 /**
  *
  * @author andrey
@@ -32,7 +32,7 @@ public abstract class User {
     
     abstract void onDeleteAccount();
     
-    abstract void createAccount(String email, String password);
+    abstract void createAccount(String email, String password) throws UserAlreadyExists;
     
 //    public boolean onLogin(String email, String password) {
 //        if

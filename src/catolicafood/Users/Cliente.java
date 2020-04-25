@@ -73,22 +73,27 @@ public class Cliente extends User {
         this.course = course;
     }
 
-    public void createAccount(String email, String password) {
-        try {
+    @Override
+    public void createAccount(String email, String password) throws UserAlreadyExists{
+        if(arq.checkLogin(email, password)){
+            throw new UserAlreadyExists("Já existe um usuario com o mesmo email "
+                    + "e senha,por favor digitar dados diferentes.");
+        }
+        else{
+            arq.writeUserDoc(email, password);
+        }
+        /*try {
             arq.writeUserDoc(email, password);
         } catch (UserAlreadyExists ex) {
             Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
 
     }
 
+    @Override
     public boolean onLogin(String email, String password) {
         boolean logged = arq.checkLogin(email, password);
-        if (logged) {
-            return true;
-        }
-
-        return false;
+        return logged;
     }
 
     public void onDeleteAccount() {
