@@ -1,14 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package catolicafood.utils;
 
-/**
- *
- * @author andrey
- */
+import catolicafood.exceptions.InvalidPosException;
+
 public class ListHist {
 
     private NodeHist inicio;
@@ -31,32 +24,41 @@ public class ListHist {
     
     //Add functions
     public void addInicio(NodeHist data) {
-        this.inicio = data;
-
-        if (this.tam == 0) {
-            this.fim = this.inicio;
+        data.setProx(inicio);
+        inicio = data;
+        
+        if (fim == null){
+            fim = data;
         }
        
         tam++;
     }
 
     public void addFim(NodeHist data) {
-        if (this.tam == 0) {
-            addInicio(data);
+        if (inicio == null){
+            inicio = data;
         } else {
-            this.fim.setProx(data);
-            this.fim = data;
+            fim.setProx(data);
         }
+        fim = data;
+        
         tam++;
     }
 
-    public void addPos(NodeHist data, int pos) {
+    public void addPos(NodeHist data, int pos) throws InvalidPosException {
+        if(pos < 0 || pos > this.tam) {
+            throw new InvalidPosException("Posição inválida");
+        }
         if (pos == 0) {
             data.setProx(this.inicio);
-            this.inicio = data;
+            inicio = data;
         } else {
-            NodeHist aux = elementoEm(pos - 1);
-            aux.setProx(data);
+            NodeHist iterador = inicio;
+            for(int i = 0; i < (pos - 1); i++){
+                iterador = iterador.getProx();
+            }
+            data.setProx(iterador.getProx());
+            iterador.setProx(data);
         }
         tam++;
     }
@@ -117,7 +119,7 @@ public class ListHist {
 
         lista = "";
         while (aux != null) {
-            lista = lista + " " + aux.getValue()+ " \n";
+            lista = lista + " " + aux.getValue().getName() + " por R$" + aux.getValue().getValue() + " \n";
             aux = aux.getProx();
         }
 
