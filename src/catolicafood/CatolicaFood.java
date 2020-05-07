@@ -14,6 +14,8 @@ import catolicafood.menu.Menu;
 import catolicafood.Loja.Items;
 import catolicafood.utils.ListItems;
 import catolicafood.utils.NodeItems;
+import catolicafood.utils.ListHist;
+import catolicafood.utils.NodeHist;
 
 /**
  *
@@ -26,6 +28,7 @@ public class CatolicaFood {
     static Scanner sc = new Scanner(System.in);
     static ListItems list = new ListItems();
     static Cliente c = new Cliente();
+    static ListHist listH = new ListHist();
 
     public static void main(String[] args) {
         byte control;
@@ -53,7 +56,7 @@ public class CatolicaFood {
                 while (!controlMarket) {
                     if (logged) {
                         System.out.println("Items da loja");
-                        System.out.println("Digite o id do item que você deseja comprar ou digite -1 para deletar sua conta: ");
+                        System.out.println("Digite o id do item que você deseja comprar, digite -1 para deletar sua conta ou digite -2 para acessar o histórico: ");
                         System.out.println(list);
                         selectedId = sc.nextByte();
 
@@ -63,12 +66,18 @@ public class CatolicaFood {
                             System.out.println("Obrigado por estar com nós, sentiremos sua falta :(");
                         } 
                         
+                        if (selectedId == -2){
+                            System.out.println(listH.toString());
+                        }
+                        
                         NodeItems itemSelected = list.elementoEm(selectedId);
                         System.out.println("Você quer comprar " + itemSelected.getValue().getName() + " pelo valor de: R$" + itemSelected.getValue().getValue() + " (S/N)");
                         sell = sc.next().charAt(0);
 
                         if (sell == 's' || sell == 'S') {
                             System.out.println("Compra confirmada, o recibo estará em seu email, realize o pagamento na loja e retire seu pedido");
+                            NodeHist nHist = new NodeHist(itemSelected.getValue());
+                            listH.addFim(nHist);
                         } else if (sell == 'n' || sell == 'N') {
                             System.out.println("Poxa :( volte para lista e procure algo que goste!");
                         }
