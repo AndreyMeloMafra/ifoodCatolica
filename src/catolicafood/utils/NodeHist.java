@@ -1,26 +1,26 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package catolicafood.utils;
 
-//Package
-import catolicafood.Loja.Pedidos;
-/**
- *
- * @author andrey
- */
+
+import catolicafood.Loja.Items;
+
+
 public class NodeHist {
     
-    private Pedidos value;
+    private Items value;
     private NodeHist prox;
 
-    public Pedidos getValue() {
+    public NodeHist(Items value) {
+        this.value = value;
+    }
+
+
+    
+
+    public Items getValue() {
         return value;
     }
 
-    public void setValue(Pedidos value) {
+    public void setValue(Items value) {
         this.value = value;
     }
 
