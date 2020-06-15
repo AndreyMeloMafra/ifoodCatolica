@@ -41,6 +41,7 @@ public class CatolicaFood {
         char market;
 
         arq.createDoc();
+        list = arq.preencher();
 
         System.out.println("Bem vindo");
         while (!controlProgram) {
@@ -54,23 +55,21 @@ public class CatolicaFood {
 
                 while (!controlMarket) {
                     if (logged) {
-                        list = arq.preencher();
                         System.out.println("Items da loja");
                         System.out.println("Digite o id do item que você deseja comprar, digite -1 para deletar sua conta ou digite -2 para acessar o histórico: ");
                         System.out.println(list);
                         selectedId = sc.nextByte();
 
-                        if (selectedId == -1) {
+                        if(selectedId == -1) {
                             c.onDeleteAccount();
-
+                            
                             System.out.println("Obrigado por estar com nós, sentiremos sua falta :(");
-
-                        }
-
-                        if (selectedId == -2) {
+                        } 
+                        
+                        if (selectedId == -2){
                             System.out.println(listH.toString());
                         }
-
+                        
                         NodeItems itemSelected = list.elementoEm(selectedId);
                         System.out.println("Você quer comprar " + itemSelected.getValue().getName() + " pelo valor de: R$" + itemSelected.getValue().getValue() + " (S/N)");
                         sell = sc.next().charAt(0);
@@ -96,7 +95,7 @@ public class CatolicaFood {
                         System.out.println("");
                     }
                 }
-
+                System.out.println("");
             } else if (control == 2) {
                 menu.createAccountMenu();
                 System.out.println("");

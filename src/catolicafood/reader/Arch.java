@@ -226,7 +226,6 @@ public class Arch {
     }
 
     public boolean checkLogin(String email, String password) {
-        boolean result = false;
 
         String emailF;
         String passwordF;
@@ -243,8 +242,11 @@ public class Arch {
             String linha;
             do {
                 linha = lerArq.readLine();
-
-                if (linha.equals(emailF)) {
+                
+                if(linha == null){
+                    return false;
+                }
+                else if (linha.equals(emailF)) {
 
                     break;
                 }
