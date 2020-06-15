@@ -22,13 +22,13 @@ public class Items {
     private String description;
     private int key;
 
-    public Items(int id, String name, String value, String description, int key) {
+    private Items(int id, String name, String value, String description, int key) {
         boolean number;
         double va;
 
         this.id = id;
         this.name = name;
-        
+
         try {
             va = Double.parseDouble(value);
             number = true;
@@ -44,6 +44,44 @@ public class Items {
 
         if (key >= 0 || key <= 3) {
             this.key = key;
+        }
+    }
+
+    public static class ItemsBuilder {
+
+        private int id;
+        private String name;
+        private String value;
+        private String description;
+        private int key;
+
+        public ItemsBuilder id(int id) {
+            this.id = id;
+            return this;
+        }
+
+        public ItemsBuilder name(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public ItemsBuilder value(String value) {
+            this.value = value;
+            return this;
+        }
+
+        public ItemsBuilder description(String description) {
+            this.description = description;
+            return this;
+        }
+
+        public ItemsBuilder key(int key) {
+            this.key = key;
+            return this;
+        }
+
+        public Items build() {
+            return new Items(id, name, value, description, key);
         }
     }
 
@@ -78,7 +116,7 @@ public class Items {
     public boolean createItem() {
 //        System.out.println(this.id + " " + this.name + " " + this.value + " " + this.description + " " + this.key);
         boolean writed = arq.writeItemsDoc(this.id, this.name, this.value, this.description, this.key);
-        
+
         return writed;
     }
 

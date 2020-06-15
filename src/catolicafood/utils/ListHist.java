@@ -5,6 +5,8 @@
  */
 package catolicafood.utils;
 
+import catolicafood.exceptions.InvalidPosException;
+
 /**
  *
  * @author andrey
@@ -28,63 +30,77 @@ public class ListHist {
     public NodeHist getFim() {
         return fim;
     }
-    
+
     //Add functions
     public void addInicio(NodeHist data) {
-        this.inicio = data;
+        data.setProx(inicio);
+        inicio = data;
 
-        if (this.tam == 0) {
-            this.fim = this.inicio;
+        if (fim == null) {
+            fim = data;
         }
-       
+
         tam++;
     }
 
     public void addFim(NodeHist data) {
-        if (this.tam == 0) {
-            addInicio(data);
+        if (inicio == null) {
+            inicio = data;
         } else {
-            this.fim.setProx(data);
-            this.fim = data;
+            fim.setProx(data);
         }
+        fim = data;
+
         tam++;
     }
 
-    public void addPos(NodeHist data, int pos) {
-        if (pos == 0) {
-            data.setProx(this.inicio);
-            this.inicio = data;
-        } else {
-            NodeHist aux = elementoEm(pos - 1);
-            aux.setProx(data);
+    public void addPos(NodeHist data, int pos) throws InvalidPosException {
+        try {
+            if (pos < 0 || pos > this.tam) {
+                throw new InvalidPosException("Posição inválida");
+            }
+
+            if (pos == 0) {
+                data.setProx(this.inicio);
+                inicio = data;
+            } else {
+                NodeHist iterador = inicio;
+                for (int i = 0; i < (pos - 1); i++) {
+                    iterador = iterador.getProx();
+                }
+                data.setProx(iterador.getProx());
+                iterador.setProx(data);
+            }
+            tam++;
+        } catch (Exception e) {
         }
-        tam++;
+
     }
-    
+
     //Remove function
-    public void remover(NodeHist data){
+    public void remover(NodeHist data) {
         int pos = search(data);
         NodeHist anterior = elementoEm(pos - 1);
         NodeHist proximo = elementoEm(pos + 1);
         anterior.setProx(proximo);
     }
-    
+
     //Search function
     public int search(NodeHist data) {
         NodeHist aux = this.inicio;
         int count = 0;
-        
-        while(aux.getProx() != null) {
-            if(data.equals(aux)) {
+
+        while (aux.getProx() != null) {
+            if (data.equals(aux)) {
                 return count;
             }
             aux = aux.getProx();
             count++;
         }
-        
+
         return -1;
     }
-    
+
     public int tam() {
         return this.tam;
     }
@@ -108,20 +124,24 @@ public class ListHist {
         }
         return null;
     }
-    
+
     @Override
-    public String toString(){
+    public String toString() {
         String lista;
 
         NodeHist aux = inicio;
 
         lista = "";
         while (aux != null) {
-            lista = lista + " " + aux.getValue()+ " \n";
+            lista = lista + " " + aux.getValue() + " \n";
             aux = aux.getProx();
         }
 
         return lista;
-    
+
+    }
+
+    private void InvalidPosException(String posição_inválida) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

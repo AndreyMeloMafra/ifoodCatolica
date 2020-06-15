@@ -205,7 +205,13 @@ public class Arch {
                 }
 
                 var = line.split("-");
-                Items auxItems = new Items(Integer.parseInt(var[0]), var[1], var[2], var[3], Integer.parseInt(var[4]));
+                Items auxItems = new Items.ItemsBuilder()
+                        .id(Integer.parseInt(var[0]))
+                        .name(var[1])
+                        .value(var[2])
+                        .description(var[3])
+                        .key(Integer.parseInt(var[4]))
+                        .build();
                 NodeItems auxNode = new NodeItems(auxItems, null);
 
                 list.addFim(auxNode);

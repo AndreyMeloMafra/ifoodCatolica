@@ -83,7 +83,14 @@ public class Menu {
         System.out.print("Descreva o produto: ");
         description = sc.nextLine();
         
-        Items item = new Items(id, name, value, description, key);
+        Items item = new Items.ItemsBuilder()
+                .id(id)
+                .name(name)
+                .value(value)
+                .description(description)
+                .key(key)
+                .build();
+        
         item.createItem();
         
         NodeItems node = new NodeItems(item, null);

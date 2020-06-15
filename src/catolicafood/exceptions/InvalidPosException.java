@@ -9,13 +9,13 @@ package catolicafood.exceptions;
  *
  * @author andrey
  */
-public class UserAlreadyExists extends Exception {
+public class InvalidPosException extends Exception {
 
-    public UserAlreadyExists(String errorMessage, Throwable err) {
+    public InvalidPosException(String errorMessage, Throwable err) {
         super(errorMessage, err);
     }
 
-    public UserAlreadyExists(String errorMessage) {
+    public InvalidPosException(String errorMessage) {
         super(errorMessage);
     }
 }
